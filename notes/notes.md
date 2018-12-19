@@ -44,3 +44,9 @@
         - following that clicking on "America" should lead [here](http://php.net/manual/en/timezones.america.php).
     - http://php.net/manual/en/pdo.error-handling.php
         - documentation for PDO::ATTR_ERRMODE.    
+        
+# section 3 lecture 23
+    - $con error is due to the concept of scope.
+        - our function createCategoriesInput() only looks for $con inside of the local scope.
+        - we resolved this issue by creating a constructor to create the $con object which can be referenced
+        in our createCategoriesInput() function.
