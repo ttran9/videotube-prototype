@@ -1,0 +1,26 @@
+---- section 2 lecture 5 --------------
+
+- flexbox layout (google search term under videos)
+    - https://www.youtube.com/watch?v=k32voqQhODc
+    - This explains the styling of "display: flex"
+
+
+---- end section 2 lecture 5 --------------
+
+
+---- section 2 lecture 8 --------------
+
+- jquery google cdn (google search term)
+    - https://developers.google.com/speed/libraries/
+- get bootstrap (google search term)
+    - https://getbootstrap.com/
+
+---- end section 2 lecture 8 --------------
+
+
+---- section 2 lecture 10 --------------
+
+- icon 8 (google search)
+    - https://icons8.com/
+
+---- end section 2 lecture 10 --------------
