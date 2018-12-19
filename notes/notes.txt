@@ -24,3 +24,12 @@
     - https://icons8.com/
 
 ---- end section 2 lecture 10 --------------
+
+
+---- section 3 lecture 17 --------------
+
+    - We use a class for creating the upload form so we don't violate "DRY."
+    - This is a link to the [forms page](https://getbootstrap.com/docs/4.0/components/forms/).
+
+---- end section 3 lecture 17 --------------
+
