@@ -28,7 +28,7 @@
 # section 3 lecture 19
     - This is a link to the page with [select box examples](https://getbootstrap.com/docs/4.0/components/forms/).
 
-# section lecture 20
+# section 3 lecture 20
     - We used phpMyAdmin.
         - First we went to the "New" to generate a database called, "VideoTube."
         - After this we selected the database and created a table called "categories."
@@ -37,3 +37,10 @@
         - After this I used the "Insert" tab to add in the sample categories.
         - After this I would view the inserted rows by viewing the "Browse" tab.    
          
+# section 3 lecture 21
+    - ob_start(): a way to prevent the output and to later output (after code is executed).
+    - http://php.net/manual/en/function.date-default-timezone-set.php
+        - clicking on List of Supported Timezones. should lead [here](http://php.net/manual/en/timezones.php)
+        - following that clicking on "America" should lead [here](http://php.net/manual/en/timezones.america.php).
+    - http://php.net/manual/en/pdo.error-handling.php
+        - documentation for PDO::ATTR_ERRMODE.    
