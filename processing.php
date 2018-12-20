@@ -1,5 +1,7 @@
 <?php
 require_once("includes/header.php");
+require_once("includes/classes/VideoUploadData.php");
+require_once("includes/classes/VideoProcessor.php");
 
 
 if(!isset($_POST['uploadButton'])) {
@@ -16,5 +18,8 @@ $videoUploadData = new VideoUploadData($_POST["fileInput"],
                             "REPLACE-THIS"
                                         );
 // 2) Process video data (upload).
+$videoProcessor = new VideoProcessor($con);
+$wasSuccessful = $videoProcessor->upload($videoUploadData); // pass the data from our video upload.
+
 // 3) Check if upload was successful.
 ?>
