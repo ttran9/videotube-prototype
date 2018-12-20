@@ -50,3 +50,11 @@
     - our function createCategoriesInput() only looks for $con inside of the local scope.
     - we resolved this issue by creating a constructor to create the $con object which can be referenced
     in our createCategoriesInput() function.
+    
+    
+# section 4 lecture 29
+- the upload process is the following..
+    - we take the video that's uploaded and move it into our videos directory.
+    - we then convert it (to mp4).
+    - we replace it with another file (we delete the old one and keep the new one, mp4 one).
+    - the above steps are done because not all browsers support all uploaded video types.
