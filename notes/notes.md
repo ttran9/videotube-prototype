@@ -58,3 +58,7 @@
     - we then convert it (to mp4).
     - we replace it with another file (we delete the old one and keep the new one, mp4 one).
     - the above steps are done because not all browsers support all uploaded video types.
+    
+# section 4 lecture 32
+    - it wasn't shown in the video but I came across error code: 1 (the file size was too large) so I had to go into the
+    php/php.ini and modify the post_max_size=2M to 8M because I was trying to upload a file that was too large.
