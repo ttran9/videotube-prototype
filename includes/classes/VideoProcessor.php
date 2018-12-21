@@ -4,12 +4,14 @@ class VideoProcessor {
     private $con;
     private $sizeLimit = 83886080;
     private $allowedTypes = array("mp4", "flv", "webm", "mkv", "vob", "ogv", "ogg", "avi", "wmv", "mov", "mpeg", "mpg");
-//    private $ffmpegPath = "ffmpeg/bin/ffmpeg"; // for unix/linux..
+//    private $ffmpegPath = "ffmpeg/bin/ffmpeg"; // MAC (USING REGFULAR XAMPP)
     private $ffmpegPath; // windows..
+    private $ffprobePath;
 
     public function __construct($con) {
         $this->con = $con;
         $this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg.exe");
+        $this->ffprobePath = realpath("ffmpeg/bin/ffprobe.exe");
     }
 
     public function upload($videoUploadData) {
@@ -42,6 +44,11 @@ class VideoProcessor {
 
             if(!$this->deleteFile($tempFilePath)) {
                 echo 'Delete failed\n';
+                return false;
+            }
+
+            if(!$this->generateThumbnails($finalFilePath)) {
+                echo 'Upload failed - could not generate thumbnails\n';
                 return false;
             }
         }
@@ -119,5 +126,19 @@ class VideoProcessor {
         }
         return true;
     }
-}
+
+    public function generateThumbnails($filePath) {
+        $thumbnailSize = "210x118";
+        $numThumbnails = 3;
+        $pathToThumbnail = "uploads/videos/thumbnails";
+
+        $duration = $this->getVideoDuration($filePath);
+
+        echo "Duration: " . $duration;
+    }
+
+    private function getVideoDuration($filePath) {
+        return shell_exec("$this->ffprobePath -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $filePath"); // shell_exec returns the output but is identical to exec otherwise.
+    }
+ }
 ?>
