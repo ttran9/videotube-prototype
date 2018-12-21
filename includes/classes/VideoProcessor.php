@@ -2,7 +2,8 @@
 class VideoProcessor {
 
     private $con;
-    private $sizeLimit = 25000000;
+    private $sizeLimit = 8388608;
+    private $allowedTypes = array("mp4", "flv", "webm", "mkv", "vob", "ogv", "ogg", "avi", "wmv", "mov", "mpeg", "mpg");
 
     public function __construct($con) {
         $this->con = $con;
@@ -25,11 +26,20 @@ class VideoProcessor {
 
         if(!$this->isValidSize($videoData)) {
             echo "File too large. Can't be more than " . $this->sizeLimit . + " bytes";
+            return false;
+        } else if(!$this->isValidType($videoType)) {
+            echo "Invalid file type";
+            return false;
         }
     }
 
     private function isValidSize($data) {
         return $data["size"] <= $this->sizeLimit;
+    }
+
+    private function isValidType($type) {
+        $lowercased = strtolower($type);
+        return in_array($lowercased, $this->allowedTypes);
     }
 }
 ?>
