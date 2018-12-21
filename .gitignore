@@ -1,3 +1,5 @@
 # PhpStorm #
 .idea/
 
+# Ignore uploaded local videos #
+uploads/videos/
