@@ -51,6 +51,8 @@ class VideoProcessor {
                 echo 'Upload failed - could not generate thumbnails\n';
                 return false;
             }
+
+            return true;
         }
     }
 
@@ -136,14 +138,45 @@ class VideoProcessor {
 
         $videoId = $this->con->lastInsertId();
         $this->updateDuration($duration, $videoId);
+
+        for($num = 1; $num <= $numThumbnails; $num++) {
+            $imageName = uniqid() . ".jpg";
+            $interval = ($duration * 0.8) / $numThumbnails * $num;
+            $fullThumbnailPath = "$pathToThumbnail/$videoId-$imageName";
+
+            $cmd = "$this->ffmpegPath -i $filePath -ss $interval -s $thumbnailSize -vframes 1 $fullThumbnailPath 2>&1"; // 2>&1 (outputs errors).
+            $outputLog = array(); // contains the output the script gives us for running ffmpeg.
+            exec($cmd,$outputLog, $returnCode); // $returnCode is created.
+
+            if($returnCode != 0) {
+                // command failed.
+                foreach ($outputLog as $line) {
+                    echo $line . "<br/>";
+                }
+            }
+
+            $query = $this->con->prepare("INSERT INTO thumbnails(videoId, filePath, selected) 
+                                          VALUES(:videoId, :filePath, :selected)");
+            $query->bindParam(":videoId", $videoId);
+            $query->bindParam(":filePath", $filePath);
+            $query->bindParam(":selected", $selected);
+
+            $selected = $num == 1 ? 1 : 0;
+
+            $success = $query->execute();
+            if(!$success) {
+                echo "Error inserting thumbnail\n";
+                return false;
+            }
+        }
+        return true;
     }
 
     private function getVideoDuration($filePath) {
-        return shell_exec("$this->ffprobePath -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $filePath"); // shell_exec returns the output but is identical to exec otherwise.
+        return (int) shell_exec("$this->ffprobePath -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $filePath"); // shell_exec returns the output but is identical to exec otherwise.
     }
 
     private function updateDuration($duration, $videoId) {
-        $duration = (int)$duration;
         $hours = floor($duration / 3600);
         $mins = floor(($duration - ($hours  * 3600)) / 60);
         $secs = floor($duration % 60);
