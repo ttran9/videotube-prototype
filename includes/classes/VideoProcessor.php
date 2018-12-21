@@ -92,7 +92,7 @@ class VideoProcessor {
     }
 
     public function convertVideoToMp4($tempFilePath, $finalFilePath) {
-        $cmd = "this->ffmpegPath -i $tempFilePath $finalFilePath 2>&1"; // 2>&1 (outputs errors).
+        $cmd = "$this->ffmpegPath -i $tempFilePath $finalFilePath 2>&1"; // 2>&1 (outputs errors).
         $outputLog = array(); // contains the output the script gives us for running ffmpeg.
         exec($cmd,$outputLog, $returnCode); // $returnCode is created.
 
