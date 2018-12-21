@@ -79,3 +79,7 @@ version of ffmpeg.
 # section 4 lecture 39
 - Commit cf018149ab7b40cf0feb7a7108df22545dc444bb has a typo which causes the command to not even be run, I have fixed
 this syntactical error since then.
+
+# section 4 lecture 42
+- Documentation for [probe](https://trac.ffmpeg.org/wiki/FFprobeTips).
+    - The with the [command](https://trac.ffmpeg.org/wiki/FFprobeTips#Formatcontainerduration).
