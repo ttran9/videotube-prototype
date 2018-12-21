@@ -75,3 +75,7 @@ version of ffmpeg.
 - the php.ini on a mac would be inside of the xamppfiles/etc directory.
     - in this lecture we modified the execution time from the default of 30 seconds to 3000.
     - we also modified the max_filesize=2M to 128M.
+    
+# section 4 lecture 39
+- Commit cf018149ab7b40cf0feb7a7108df22545dc444bb has a typo which causes the command to not even be run, I have fixed
+this syntactical error since then.
