@@ -3,3 +3,6 @@
 
 # Ignore uploaded local videos #
 uploads/videos/
+
+# ffmeg #
+ffmpeg
