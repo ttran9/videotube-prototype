@@ -65,7 +65,22 @@ class VideoProcessor {
     }
 
     private function insertVideoData($uploadData, $filePath) {
+        $query = $this->con->prepare("INSERT INTO videos(title, uploadedBy, description, privacy, category, filePath) 
+                                        VALUES(:title, :uploadedBy, :description, :privacy, :category, :filePath)");
+        $title = $uploadData->getTitle();
+        $uploadedBy = $uploadData->getUploadedBy();
+        $description = $uploadData->getDescription();
+        $privacy = $uploadData->getPrivacy();
+        $category = $uploadData->getCategory();
+        $query->bindParam(":title", $title);
+        $query->bindParam(":uploadedBy", $uploadedBy);
+        $query->bindParam(":description", $description);
+        $query->bindParam(":privacy", $privacy);
+        $query->bindParam(":category", $category);
+        $query->bindParam(":filePath", $filePath);
 
+        // want to return the boolean value which indicates if the query worked or not.
+        return $query->execute();
     }
 }
 ?>
