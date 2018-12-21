@@ -83,3 +83,9 @@ this syntactical error since then.
 # section 4 lecture 42
 - Documentation for [probe](https://trac.ffmpeg.org/wiki/FFprobeTips).
     - The with the [command](https://trac.ffmpeg.org/wiki/FFprobeTips#Formatcontainerduration).
+    
+# section 4 lecture 46
+- Documentation for [modals](https://getbootstrap.com/docs/4.0/components/modal/).
+    - The vertical centered modal is [here](https://getbootstrap.com/docs/4.0/components/modal/#vertically-centered).
+-  data-backdrop="static": prevents the user from clicking out of the modal to close the it (the dialog-like box).
+-  data-keyboard="false": prevents the user from closing the modal through keyboard stroke(s).
