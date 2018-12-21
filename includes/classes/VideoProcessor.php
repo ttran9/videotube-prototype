@@ -39,6 +39,11 @@ class VideoProcessor {
                 echo 'Upload failed';
                 return false;
             }
+
+            if(!$this->deleteFile($tempFilePath)) {
+                echo 'Delete failed\n';
+                return false;
+            }
         }
     }
 
@@ -91,7 +96,7 @@ class VideoProcessor {
         return $query->execute();
     }
 
-    public function convertVideoToMp4($tempFilePath, $finalFilePath) {
+    private function convertVideoToMp4($tempFilePath, $finalFilePath) {
         $cmd = "$this->ffmpegPath -i $tempFilePath $finalFilePath 2>&1"; // 2>&1 (outputs errors).
         $outputLog = array(); // contains the output the script gives us for running ffmpeg.
         exec($cmd,$outputLog, $returnCode); // $returnCode is created.
@@ -104,6 +109,14 @@ class VideoProcessor {
             return false;
         }
 
+        return true;
+    }
+
+    private function deleteFile($filePath) {
+        if(!unlink($filePath)) {
+            echo 'Could not delete file\n';
+            return false;
+        }
         return true;
     }
 }
