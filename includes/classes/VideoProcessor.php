@@ -4,9 +4,12 @@ class VideoProcessor {
     private $con;
     private $sizeLimit = 83886080;
     private $allowedTypes = array("mp4", "flv", "webm", "mkv", "vob", "ogv", "ogg", "avi", "wmv", "mov", "mpeg", "mpg");
+//    private $ffmpegPath = "ffmpeg/bin/ffmpeg"; // for unix/linux..
+    private $ffmpegPath; // windows..
 
     public function __construct($con) {
         $this->con = $con;
+        $this->ffmpegPath = realpath("ffmpeg/bin/ffmpeg.exe");
     }
 
     public function upload($videoUploadData) {
@@ -29,6 +32,11 @@ class VideoProcessor {
             // $videoUploadData holds the information from the <input type=file ... /> tag"
             if(!$this->insertVideoData($videoUploadData, $finalFilePath)) {
                 echo 'Insert query failed';
+                return false;
+            }
+
+            if(!$this->convertVideoToMp4($tempFilePath, $finalFilePath)) {
+                echo 'Upload failed';
                 return false;
             }
         }
@@ -81,6 +89,22 @@ class VideoProcessor {
 
         // want to return the boolean value which indicates if the query worked or not.
         return $query->execute();
+    }
+
+    public function convertVideoToMp4($tempFilePath, $finalFilePath) {
+        $cmd = "this->ffmpegPath -i $tempFilePath $finalFilePath 2>&1"; // 2>&1 (outputs errors).
+        $outputLog = array(); // contains the output the script gives us for running ffmpeg.
+        exec($cmd,$outputLog, $returnCode); // $returnCode is created.
+
+        if($returnCode != 0) {
+            // command failed.
+            foreach ($outputLog as $line) {
+                echo $line . "<br/>";
+            }
+            return false;
+        }
+
+        return true;
     }
 }
 ?>
