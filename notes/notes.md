@@ -51,7 +51,6 @@
     - we resolved this issue by creating a constructor to create the $con object which can be referenced
     in our createCategoriesInput() function.
     
-    
 # section 4 lecture 29
 - the upload process is the following..
     - we take the video that's uploaded and move it into our videos directory.
@@ -60,5 +59,12 @@
     - the above steps are done because not all browsers support all uploaded video types.
     
 # section 4 lecture 32
-    - it wasn't shown in the video but I came across error code: 1 (the file size was too large) so I had to go into the
-    php/php.ini and modify the post_max_size=2M to 8M because I was trying to upload a file that was too large.
+- it wasn't shown in the video but I came across error code: 1 (the file size was too large) so I had to go into the
+php/php.ini and modify the post_max_size=2M to 8M because I was trying to upload a file that was too large.
+
+# section 4 lecture 35
+- Link to [ffmpeg](https://www.ffmpeg.org/).
+    - This helps with converting the video file, can also convert audio files too.
+- I added ffmpeg to the .gitignore because I did not want to force the user into having a certain platform dependent
+version of ffmpeg.
+    - The user can just download it at ffmpeg's website.
