@@ -136,10 +136,6 @@ class VideoProcessor {
 
         $videoId = $this->con->lastInsertId();
         $this->updateDuration($duration, $videoId);
-
-        echo "Duration: " . $duration;
-
-        return true;
     }
 
     private function getVideoDuration($filePath) {
@@ -147,9 +143,21 @@ class VideoProcessor {
     }
 
     private function updateDuration($duration, $videoId) {
+        $duration = (int)$duration;
         $hours = floor($duration / 3600);
         $mins = floor(($duration - ($hours  * 3600)) / 60);
         $secs = floor($duration % 60);
+
+        $hours = ($hours < 1) ? "" : $hours . ":";
+        $mins = ($mins < 10) ? "0" . $mins . ":" : $mins . ":";
+        $secs = ($secs < 10) ? "0" . $secs : $secs;
+
+        $duration = $hours.$mins.$secs;
+
+        $query = $this->con->prepare("UPDATE videos SET duration=:duration WHERE id=:videoId");
+        $query->bindParam(":duration", $duration);
+        $query->bindParam(":videoId", $videoId);
+        $query->execute();
     }
  }
 ?>
