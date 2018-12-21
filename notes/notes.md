@@ -68,3 +68,10 @@ php/php.ini and modify the post_max_size=2M to 8M because I was trying to upload
 - I added ffmpeg to the .gitignore because I did not want to force the user into having a certain platform dependent
 version of ffmpeg.
     - The user can just download it at ffmpeg's website.
+    
+    
+# section 4 lecture 37
+- note using the $ffmpegPath member for windows requires getting the full path name.
+- the php.ini on a mac would be inside of the xamppfiles/etc directory.
+    - in this lecture we modified the execution time from the default of 30 seconds to 3000.
+    - we also modified the max_filesize=2M to 128M.
