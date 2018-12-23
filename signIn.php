@@ -1,5 +1,22 @@
 <?php
 require_once("includes/config.php");
+require_once("includes/classes/FormSanitizer.php");
+require_once("includes/classes/Constants.php");
+require_once("includes/classes/Account.php");
+
+if(isset($_POST["submitButton"])) {
+
+    $username = FormSanitizer::sanitizeFormUsername($_POST["username"]);
+    $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
+    $wasSuccessful = $account->login($username, $password);
+
+    if($wasSuccessful) {
+        // success (store user name into the session).
+        $_SESSION["userLoggedIn"] = $userName;
+        // redirect user to index page
+        header("Location: index.php");
+    }
+}
 
 function getInputValue($name) {
     if(isset($_POST[$name])) {
