@@ -22,6 +22,7 @@ if(isset($_POST["submitButton"])) {
 
     if($wasSuccessful) {
         // success
+        echo 'SUCCESS';
         // redirect user to index page
     }
 }
