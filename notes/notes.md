@@ -89,3 +89,8 @@ this syntactical error since then.
     - The vertical centered modal is [here](https://getbootstrap.com/docs/4.0/components/modal/#vertically-centered).
 -  data-backdrop="static": prevents the user from clicking out of the modal to close the it (the dialog-like box).
 -  data-keyboard="false": prevents the user from closing the modal through keyboard stroke(s).
+
+
+# section 5 lecture 70.
+- session_destroy(); // destroys entire session.
+- unset($_SESSION["userLoggedIn"]); // only destroys this one session variable.
