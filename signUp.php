@@ -1,4 +1,12 @@
-<?php require_once("includes/config.php"); ?>
+<?php
+require_once("includes/config.php");
+
+if(isset($_POST["submitButton"])) {
+    $firstName = $_POST["firstName"];
+    echo $firstName;
+}
+
+?>
 
 <!doctype html>
 <html>
