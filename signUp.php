@@ -25,15 +25,15 @@
         <div class="loginForm">
             <form action="signUp.php" method="POST">
 
-                <input type="text" name="firstName" placeholder="First name" autocomplete="off" required /> <br/>
-                <input type="text" name="lastName" placeholder="Last name" autocomplete="off" required /> <br/>
-                <input type="text" name="username" placeholder="User name" autocomplete="off" required /> <br/>
+                <input type="text" name="firstName" placeholder="First name" autocomplete="off" required />
+                <input type="text" name="lastName" placeholder="Last name" autocomplete="off" required />
+                <input type="text" name="username" placeholder="User name" autocomplete="off" required />
 
-                <input type="email" name="email" placeholder="Email" autocomplete="off" required /> <br/>
-                <input type="email" name="email2" placeholder="Confirm Email" autocomplete="off" required /> <br/>
+                <input type="email" name="email" placeholder="Email" autocomplete="off" required />
+                <input type="email" name="email2" placeholder="Confirm Email" autocomplete="off" required />
 
-                <input type="password" name="password" placeholder="Password" autocomplete="off" required /> <br/>
-                <input type="password" name="password2" placeholder="Confirm Password" autocomplete="off" required /> <br/>
+                <input type="password" name="password" placeholder="Password" autocomplete="off" required />
+                <input type="password" name="password2" placeholder="Confirm Password" autocomplete="off" required />
 
                 <input type="submit" name="submitButton" value="Submit" />
 
