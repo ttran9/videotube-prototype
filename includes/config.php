@@ -1,5 +1,6 @@
 <?php
 ob_start(); //Turns on output buffering
+session_start(); // starts session (so we can use a session).
 
 date_default_timezone_set("America/Los_Angeles");
 
