@@ -12,6 +12,7 @@ class Account {
         $this->validFirstName($firstName);
         $this->validLastName($lastName);
         $this->validUsername($username);
+        $this->validateEmails($email, $email2);
     }
 
     private function validFirstName($firstName) {
@@ -28,7 +29,6 @@ class Account {
     }
 
     private function validUsername($username) {
-        // can do other validations if necessary....
         if(strlen($username) < 5 || strlen($username) > 25) {
             array_push($this->errorArray, Constants::$usernameCharacters);
             return ;
@@ -41,6 +41,26 @@ class Account {
             array_push($this->errorArray, Constants::$usernameTaken);
         }
 
+    }
+
+    private function validateEmails($email, $email2) {
+        if($email != $email2) {
+            array_push($this->errorArray, Constants::$emailsDoNotMatch);
+            return ;
+        }
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            array_push($this->errorArray, Constants::$emailInvalid);
+            return ;
+        }
+
+        $query = $this->con->prepare("SELECT email FROM users WHERE email=:email");
+        $query->bindParam(":email", $email);
+        $query->execute();
+
+        if($query->rowCount() != 0) {
+            array_push($this->errorArray, Constants::$emailTaken);
+        }
     }
 
     public function getError($error) {
