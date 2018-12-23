@@ -8,6 +8,22 @@ class Account {
         $this->con = $con;
     }
 
+    public function login($username, $password) {
+        $password = hash("sha512", $password);
+
+        $query = $this->con->prepare("SELECT * FROM users WHERE username=:username AND password=:password");
+        $query->bindParam(":username", $username);
+        $query->bindParam(":password", $password);
+        $query->execute();
+
+        if($query->rowCount() == 1) {
+            return true;
+        } else {
+            array_push($this->errorArray, Constants::$loginFailed);
+            return false;
+        }
+    }
+
     public function register($firstName, $lastName, $username, $email, $email2, $password, $password2) {
         $this->validFirstName($firstName);
         $this->validLastName($lastName);
@@ -100,7 +116,6 @@ class Account {
         if(strlen($password) < 5 || strlen($password) > 30) {
             array_push($this->errorArray, Constants::$passwordLength);
         }
-
 
     }
 
