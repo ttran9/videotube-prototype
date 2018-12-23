@@ -23,10 +23,13 @@
             </div>
 
             <div class="loginForm">
+                <form action="signUp.php">
+
+                </form>
 
             </div>
 
-            <a href="signin.php" class="signInMessage">Already have an account? Sign In Here!</a>
+            <a href="signIn.php" class="signInMessage">Already have an account? Sign In Here!</a>
         </div>
 
     </div>
