@@ -19,4 +19,8 @@ $video->incrementViews();
 
 </div>
 
+<div class="suggestions">
+
+</div>
+
 <?php require_once("includes/footer.php"); ?>
