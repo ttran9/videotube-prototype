@@ -1,4 +1,13 @@
-<?php require_once("includes/config.php"); ?>
+<?php
+require_once("includes/config.php");
+
+function getInputValue($name) {
+    if(isset($_POST[$name])) {
+        echo $_POST[$name];
+    }
+}
+
+?>
 
 <!doctype html>
 <html>
@@ -25,7 +34,8 @@
             <div class="loginForm">
                 <form action="signIn.php" method="POST">
 
-                    <input type="text" name="username" placeholder="User name" required autocomplete="off" />
+                    <input type="text" name="username" placeholder="User name"
+                           value="<?php getInputValue('username') ?>" required autocomplete="off" />
                     <input type="password" name="password" placeholder="Password" required />
                     <input type="submit" name="submitButton" value="Submit" />
 
