@@ -23,6 +23,7 @@ class Account {
     }
 
     public function insertUserDetails($firstName, $lastName, $username, $email, $password) {
+        $password = hash("sha512", $password);
         return true;
     }
 
