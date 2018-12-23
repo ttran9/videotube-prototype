@@ -169,3 +169,29 @@ a:hover {
 .signinContainer .column .header span {
    font-size: 14px;
 }
+
+.signinContainer .column form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signinContainer .column form input[type="text"],
+.signinContainer .column form input[type="email"],
+.signinContainer .column form input[type="password"] {
+    font-size: 14px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 1px solid #dedede;
+}
+
+.signinContainer .column form input[type="submit"] {
+    background: #4285f4;
+    color: #fff;
+    height: 36px;
+    width: 88px;
+    border: none;
+    border-radius: 3px;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
