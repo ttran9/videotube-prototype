@@ -43,9 +43,27 @@ class ButtonProvider {
     public static function createEditVideoButton($videoId) {
         $href = "editVideo.php?videoId=$videoId";
 
-        $button = ButtonProvider::createHyperlinkButton("Edit Video", null, $href, "edit button");
+        $button = ButtonProvider::createHyperlinkButton("EDIT VIDEO", null, $href, "EDIT BUTTON");
 
         return "<div class='editVideoButtonContainer'>
+                    $button
+                </div>";
+    }
+
+    public static function createSubscriberButton($con, $userToObj, $userLoggedInObj) {
+        $userTo = $userToObj->getUsername();
+        $userLoggedIn = $userLoggedInObj->getUsername();
+
+        $isSubscribedTo = $userLoggedInObj->isSubscribedTo($userTo);
+        $buttonText = $isSubscribedTo ? "SUBSCRIBE " : "SUBSCRIBE";
+        $buttonText .= " " . $userToObj->getSubscriberCount();
+
+        $buttonClass = $isSubscribedTo ? "unsubscribe button" : "subscribe button";
+        $action = "subscribe(\"$userTo\", \"$userLoggedIn\", this)";
+
+        $button = ButtonProvider::createButton($buttonText, null, $action, $buttonClass);
+
+        return "<div class='subscribeButtonContainer'>
                     $button
                 </div>";
     }
