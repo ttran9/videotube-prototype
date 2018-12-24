@@ -3,8 +3,8 @@ function subscribe(userTo, userFrom, button) {
         alert("You can't subscribe to yourself");
         return ;
     }
-    $.post("ajax/subscribe.php")
+    $.post("ajax/subscribe.php", {userTo: userTo, userFrom: userFrom})
     .done(function(data) {
-        console.log("done");
+        console.log(data);
     });
 }
