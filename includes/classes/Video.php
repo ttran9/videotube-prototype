@@ -91,12 +91,7 @@ class Video {
     public function like() {
         $videoId = $this->getId();
         $username = $this->userLoggedInObj->getUsername();
-        $query = $this->con->prepare("SELECT * FROM likes WHERE username=:username and videoId=:videoId");
-        $query->bindParam(":username", $username);
-        $query->bindParam(":videoId", $videoId);
-        $query->execute();
-
-        if($query->rowCount() > 0) {
+        if($this->wasLikedBy()) {
             // user has already liked.
             $query = $this->con->prepare("DELETE FROM likes WHERE username=:username and videoId=:videoId");
             $query->bindParam(":username", $username);
@@ -128,5 +123,17 @@ class Video {
             return json_encode($result);
         }
     }
+
+    public function wasLikedBy() {
+        $videoId = $this->getId();
+        $username = $this->userLoggedInObj->getUsername();
+        $query = $this->con->prepare("SELECT * FROM likes WHERE username=:username and videoId=:videoId");
+        $query->bindParam(":username", $username);
+        $query->bindParam(":videoId", $videoId);
+        $query->execute();
+
+        return $query->rowCount() > 0;
+    }
+
 }
 ?>
