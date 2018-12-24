@@ -18,8 +18,15 @@ class VideoInfoControls {
 
     private function createLikeButton()
     {
+        $text = $this->video->getLikes();
+        $videoId = $this->video->getId();
+        $action = "likeVideo(this, $videoId)"; // a javascript function.
+        $class = 'likeButton';
+        $imageSrc = "assets/images/icons/thumb-up.png";
 
-        return ButtonProvider::createButton("Like", "", "", "");
+        // change button image if video has been liked already.
+
+        return ButtonProvider::createButton($text, $imageSrc, $action, $class);
     }
 
     private function createDislikeButton()
