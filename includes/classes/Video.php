@@ -114,12 +114,18 @@ class Video {
             $query->bindParam(":username", $username);
             $query->bindParam(":videoId", $videoId);
             $query->execute();
+            $count = $query->rowCount();
 
             // user has not liked.
             $query = $this->con->prepare("INSERT INTO likes(username, videoId) VALUES(:username, :videoId)");
             $query->bindParam(":username", $username);
             $query->bindParam(":videoId", $videoId);
             $query->execute();
+            $result = array (
+                "likes" => 1,
+                "dislikes" => 0 - $count
+            );
+            return json_encode($result);
         }
     }
 }
