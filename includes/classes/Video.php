@@ -124,6 +124,42 @@ class Video {
         }
     }
 
+    public function dislike() {
+        $videoId = $this->getId();
+        $username = $this->userLoggedInObj->getUsername();
+        if($this->wasDislikedBy()) {
+            // user has already disliked.
+            $query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username and videoId=:videoId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":videoId", $videoId);
+            $query->execute();
+
+            $result = array (
+                "likes" => 0,
+                "dislikes" => -1
+            );
+            return json_encode($result);
+        } else {
+            // if we dislike a video we must also delete our like if there is one.
+            $query = $this->con->prepare("DELETE FROM likes WHERE username=:username and videoId=:videoId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":videoId", $videoId);
+            $query->execute();
+            $count = $query->rowCount();
+
+            // user has not disliked.
+            $query = $this->con->prepare("INSERT INTO dislikes(username, videoId) VALUES(:username, :videoId)");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":videoId", $videoId);
+            $query->execute();
+            $result = array (
+                "likes" => 0 - $count,
+                "dislikes" => 1
+            );
+            return json_encode($result);
+        }
+    }
+
     public function wasLikedBy() {
         $videoId = $this->getId();
         $username = $this->userLoggedInObj->getUsername();
