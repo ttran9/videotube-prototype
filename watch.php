@@ -1,6 +1,7 @@
 <?php
 require_once("includes/header.php");
 require_once("includes/classes/VideoPlayer.php");
+require_once("includes/classes/VideoInfoSection.php");
 if(!isset($_GET["id"])) {
     echo "No url passed into page!";
     exit();
@@ -15,6 +16,9 @@ $video->incrementViews();
 <?php
     $videoPlayer = new VideoPlayer($video);
     echo $videoPlayer->create(true);
+
+    $videoInfoSection = new VideoInfoSection($video, $con, $userLoggedInObj);
+    echo $videoInfoSection->create();
 ?>
 
 </div>
