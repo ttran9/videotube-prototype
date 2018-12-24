@@ -98,8 +98,17 @@ class Video {
 
         if($query->rowCount() > 0) {
             // user has already liked.
-            echo 'liked';
+            $query = $this->con->prepare("DELETE FROM likes WHERE username=:username and videoId=:videoId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":videoId", $videoId);
+            $query->execute();
         } else {
+            // if we like a video we must also delete our dislike if there is one.
+            $query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username and videoId=:videoId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":videoId", $videoId);
+            $query->execute();
+
             // user has not liked.
             $query = $this->con->prepare("INSERT INTO likes(username, videoId) VALUES(:username, :videoId)");
             $query->bindParam(":username", $username);
