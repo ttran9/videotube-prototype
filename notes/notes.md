@@ -3,13 +3,11 @@
     - https://www.youtube.com/watch?v=k32voqQhODc
     - This explains the styling of "display: flex"
 
-
 # section 2 lecture 8
 - jquery google cdn (google search term)
     - https://developers.google.com/speed/libraries/
 - get bootstrap (google search term)
     - https://getbootstrap.com/
-
 
 # section 2 lecture 10
 - icon 8 (google search)
@@ -28,6 +26,7 @@
 # section 3 lecture 19
 - This is a link to the page with [select box examples](https://getbootstrap.com/docs/4.0/components/forms/).
 
+
 # section 3 lecture 20
 - We used phpMyAdmin.
     - First we went to the "New" to generate a database called, "VideoTube."
@@ -37,6 +36,7 @@
     - After this I used the "Insert" tab to add in the sample categories.
     - After this I would view the inserted rows by viewing the "Browse" tab.    
          
+         
 # section 3 lecture 21
 - ob_start(): a way to prevent the output and to later output (after code is executed).
 - http://php.net/manual/en/function.date-default-timezone-set.php
@@ -45,11 +45,13 @@
 - http://php.net/manual/en/pdo.error-handling.php
     - documentation for PDO::ATTR_ERRMODE.    
         
+        
 # section 3 lecture 23
 - $con error is due to the concept of scope.
     - our function createCategoriesInput() only looks for $con inside of the local scope.
     - we resolved this issue by creating a constructor to create the $con object which can be referenced
     in our createCategoriesInput() function.
+    
     
 # section 4 lecture 29
 - the upload process is the following..
@@ -58,9 +60,11 @@
     - we replace it with another file (we delete the old one and keep the new one, mp4 one).
     - the above steps are done because not all browsers support all uploaded video types.
     
+    
 # section 4 lecture 32
 - it wasn't shown in the video but I came across error code: 1 (the file size was too large) so I had to go into the
 php/php.ini and modify the post_max_size=2M to 8M because I was trying to upload a file that was too large.
+
 
 # section 4 lecture 35
 - Link to [ffmpeg](https://www.ffmpeg.org/).
@@ -76,13 +80,16 @@ version of ffmpeg.
     - in this lecture we modified the execution time from the default of 30 seconds to 3000.
     - we also modified the max_filesize=2M to 128M.
     
+    
 # section 4 lecture 39
 - Commit cf018149ab7b40cf0feb7a7108df22545dc444bb has a typo which causes the command to not even be run, I have fixed
 this syntactical error since then.
 
+
 # section 4 lecture 42
 - Documentation for [probe](https://trac.ffmpeg.org/wiki/FFprobeTips).
     - The with the [command](https://trac.ffmpeg.org/wiki/FFprobeTips#Formatcontainerduration).
+    
     
 # section 4 lecture 46
 - Documentation for [modals](https://getbootstrap.com/docs/4.0/components/modal/).
@@ -95,7 +102,12 @@ this syntactical error since then.
 - session_destroy(); // destroys entire session.
 - unset($_SESSION["userLoggedIn"]); // only destroys this one session variable.
 
+
 # section 7 lecture 98.
 - one thing I struggled with while watching the video was I forgot to use the class selector when using the "likeButton.find('text')"
 instead of "likeButton.find('.text')" and when debugging I should've realized quicker when my element.text() was
 not returning a value but rather an empty string.
+
+
+#section 8 lecture 103
+- Documentation for date formatting [here](http://php.net/manual/en/function.date.php).
