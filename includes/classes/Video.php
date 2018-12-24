@@ -102,6 +102,12 @@ class Video {
             $query->bindParam(":username", $username);
             $query->bindParam(":videoId", $videoId);
             $query->execute();
+
+            $result = array (
+              "likes" => -1,
+              "dislikes" => 0
+            );
+            return json_encode($result);
         } else {
             // if we like a video we must also delete our dislike if there is one.
             $query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username and videoId=:videoId");
