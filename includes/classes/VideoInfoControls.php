@@ -25,6 +25,9 @@ class VideoInfoControls {
         $imageSrc = "assets/images/icons/thumb-up.png";
 
         // change button image if video has been liked already.
+        if($this->video->wasLikedBy()) {
+            $imageSrc = "assets/images/icons/thumb-up-active.png";
+        }
 
         return ButtonProvider::createButton($text, $imageSrc, $action, $class);
     }
