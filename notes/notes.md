@@ -94,3 +94,8 @@ this syntactical error since then.
 # section 5 lecture 70.
 - session_destroy(); // destroys entire session.
 - unset($_SESSION["userLoggedIn"]); // only destroys this one session variable.
+
+# section 7 lecture 98.
+- one thing I struggled with while watching the video was I forgot to use the class selector when using the "likeButton.find('text')"
+instead of "likeButton.find('.text')" and when debugging I should've realized quicker when my element.text() was
+not returning a value but rather an empty string.
