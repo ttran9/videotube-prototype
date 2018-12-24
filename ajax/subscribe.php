@@ -32,6 +32,6 @@ if(isset($_POST['userTo']) && isset($_POST['userFrom'])) {
     echo $query->rowCount();
 }
 else {
-    echo "One or more parametsr are not passed into the subscribe.php file.";
+    echo "One or more parameters are not passed into the subscribe.php file.";
 }
 ?>
