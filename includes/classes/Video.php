@@ -61,8 +61,8 @@ class Video {
 
     public function incrementViews() {
         $query = $this->con->prepare("UPDATE videos SET views=views + 1 WHERE id=:id");
-        $query->bindParam(":id", $videoId);
         $videoId = $this->getId();
+        $query->bindParam(":id", $videoId);
         $query->execute();
 
         $this->sqlData["views"] = $this->sqlData["views"] + 1;
@@ -70,8 +70,8 @@ class Video {
 
     public function getLikes() {
         $query = $this->con->prepare("SELECT count(*) as 'count' FROM likes WHERE videoId=:videoId");
-        $query->bindParam(":videoId", $videoId);
         $videoId = $this->getId();
+        $query->bindParam(":videoId", $videoId);
         $query->execute();
 
         $data = $query->fetch(PDO::FETCH_ASSOC);
@@ -80,8 +80,8 @@ class Video {
 
     public function getDislikes() {
         $query = $this->con->prepare("SELECT count(*) as 'count' FROM dislikes WHERE videoId=:videoId");
-        $query->bindParam(":videoId", $videoId);
         $videoId = $this->getId();
+        $query->bindParam(":videoId", $videoId);
         $query->execute();
 
         $data = $query->fetch(PDO::FETCH_ASSOC);
@@ -90,10 +90,10 @@ class Video {
 
     public function like() {
         $videoId = $this->getId();
+        $username = $this->userLoggedInObj->getUsername();
         $query = $this->con->prepare("SELECT * FROM likes WHERE username=:username and videoId=:videoId");
         $query->bindParam(":username", $username);
         $query->bindParam(":videoId", $videoId);
-        $username = $this->userLoggedInObj->getUsername();
         $query->execute();
 
         if($query->rowCount() > 0) {
