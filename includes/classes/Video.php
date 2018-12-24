@@ -135,5 +135,16 @@ class Video {
         return $query->rowCount() > 0;
     }
 
+    public function wasDislikedBy() {
+        $videoId = $this->getId();
+        $username = $this->userLoggedInObj->getUsername();
+        $query = $this->con->prepare("SELECT * FROM dislikes WHERE username=:username and videoId=:videoId");
+        $query->bindParam(":username", $username);
+        $query->bindParam(":videoId", $videoId);
+        $query->execute();
+
+        return $query->rowCount() > 0;
+    }
+
 }
 ?>
