@@ -189,7 +189,7 @@ class Comment {
         $username = $this->userLoggedInObj->getUsername();
         if($this->wasDislikedBy()) {
             // user has already disliked.
-            $query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username and commentId=:$commentId");
+            $query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username and commentId=:commentId");
             $query->bindParam(":username", $username);
             $query->bindParam(":commentId", $commentId);
             $query->execute();
