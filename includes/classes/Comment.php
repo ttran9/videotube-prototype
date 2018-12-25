@@ -212,5 +212,23 @@ class Comment {
             return -1 - $count;
         }
     }
+
+    public function getReplies() {
+        $commentId = $this->getId();
+        $videoId = $this->getVideoId();
+        // get comments in response to this video (not other comments).
+        $query = $this->con->prepare("SELECT * FROM comments WHERE responseTo=:commentId ORDER BY datePosted ASC");
+        $query->bindParam(":commentId", $commentId);
+        $query->execute();
+
+        $comments = "";
+
+        while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $comment = new Comment($this->con, $row, $this->userLoggedInObj, $videoId);
+            $comments .= $comment->create();
+        }
+
+        return $comments;
+    }
 }
 ?>
