@@ -109,5 +109,17 @@ instead of "likeButton.find('.text')" and when debugging I should've realized qu
 not returning a value but rather an empty string.
 
 
-#section 8 lecture 103
+# section 8 lecture 103
 - Documentation for date formatting [here](http://php.net/manual/en/function.date.php).
+
+
+# section 9 lecture 128
+- Reference for the function we used in this video is [here](https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago).
+- some notes for the function time_elapsed_string:
+    - I struggled a lot with this but I decided to format the string to look at the diff values and realized for the 
+    US/Los_Angeles timezone was giving me a negative year of nearly two years so that's what ultimately made me
+    decide to swap how I was evaluating the $diff variable.
+    - I must also add I'm not sure why swapping the $ago and $now variables in the $diff function call resolve my issue.
+    - I tried other timezones and they did not require this "hack" solution.
+    - I tried America/Denver, America/New_York, Pacific/Honolulu, and America/Phoenix as well as modifying php.ini "date.timezone" under
+    the [Date] section.
