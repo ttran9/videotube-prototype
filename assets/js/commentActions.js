@@ -45,7 +45,26 @@ function likeComment(commentId, button, videoId) {
 }
 
 function dislikeComment(commentId, button, videoId) {
+    $.post("ajax/dislikeComment.php", {videoId: videoId, commentId: commentId})
+        .done(function(numToChange) {
 
+            var dislikeButton = $(button); // create a jquery object from the javascript button (to be able to use jquery functions).
+            var likeButton = $(button).siblings(".likeButton");
+
+            dislikeButton.addClass("active");
+            likeButton.removeClass("active");
+
+            var likesCount = $(button).siblings(".likesCount");
+            updateLikesValue(likesCount, numToChange);
+
+            if(numToChange > 0) {
+                dislikeButton.removeClass("active");
+                dislikeButton.find("img:first").attr("src", "assets/images/icons/thumb-down.png"); // find the first image and stop.
+            } else {
+                dislikeButton.find("img:first").attr("src", "assets/images/icons/thumb-down-active.png");
+            }
+            likeButton.find("img:first").attr("src", "assets/images/icons/thumb-up.png");
+        });
 }
 
 function updateLikesValue(element, num) {
