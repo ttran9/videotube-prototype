@@ -35,7 +35,7 @@ class Comment {
         $numResponses = $this->getNumberOfReplies();
 
         if($numResponses > 0) {
-            $viewRepliesText = "<span class='repliesSection viewsReplies' onclick='getReplies($id, this, $videoId)'>
+            $viewRepliesText = "<span class='repliesSection viewReplies' onclick='getReplies($id, this, $videoId)'>
                                    View all $numResponses replies</span>";
         } else {
             $viewRepliesText = "<div class='repliesSection'></div>";
@@ -151,6 +151,66 @@ class Comment {
         $numDislikes = $data['count'];
 
         return $numLikes - $numDislikes;
+    }
+
+    public function like() {
+        $commentId = $this->getId();
+        $username = $this->userLoggedInObj->getUsername();
+        if($this->wasLikedBy()) {
+            // user has already liked.
+            $query = $this->con->prepare("DELETE FROM likes WHERE username=:username and commentId=:commentId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $commentId);
+            $query->execute();
+
+            // we just dislike so just have one less like.
+            return -1;
+        } else {
+            // if we like a comment we must also delete our dislike if there is one.
+            $query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username and commentId=:commentId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $commentId);
+            $query->execute();
+            $count = $query->rowCount();
+
+            // user has not liked.
+            $query = $this->con->prepare("INSERT INTO likes(username, commentId) VALUES(:username, :commentId)");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $commentId);
+            $query->execute();
+
+            // we remove a dislike and add a like.
+            return 1 + $count;
+        }
+    }
+
+    public function dislike() {
+        $commentId = $this->getId();
+        $username = $this->userLoggedInObj->getUsername();
+        if($this->wasDislikedBy()) {
+            // user has already disliked.
+            $query = $this->con->prepare("DELETE FROM dislikes WHERE username=:username and commentId=:$commentId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $commentId);
+            $query->execute();
+
+            return 1;
+        } else {
+            // if we dislike a comment we must also delete our like if there is one.
+            $query = $this->con->prepare("DELETE FROM likes WHERE username=:username and commentId=:commentId");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $commentId);
+            $query->execute();
+            $count = $query->rowCount();
+
+            // user has not disliked.
+            $query = $this->con->prepare("INSERT INTO dislikes(username, commentId) VALUES(:username, :commentId)");
+            $query->bindParam(":username", $username);
+            $query->bindParam(":commentId", $commentId);
+            $query->execute();
+            // when we remove a like and add a dislike.
+            return -1 - $count;
+        }
     }
 }
 ?>
