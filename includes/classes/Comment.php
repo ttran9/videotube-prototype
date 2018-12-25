@@ -25,7 +25,7 @@ class Comment {
         $body = $this->sqlData["body"];
         $postedBy = $this->sqlData["postedBy"];
         $profileButton = ButtonProvider::createUserProfileButton($this->con, $postedBy);
-        $timespan = ""; // TODO: get timespan.
+        $timespan = $this->time_elapsed_string($this->sqlData["datePosted"]); // get timespan.
 
         $commentControlsObj = new CommentControls($this->con, $this, $this->userLoggedInObj);
         $commentControls = $commentControlsObj->create();
@@ -50,6 +50,35 @@ class Comment {
                     </div>
                     $commentControls
                 </div>";
+    }
+
+    private function time_elapsed_string($datetime, $full = false) {
+        $now = new DateTime;
+        $ago = new DateTime($datetime);
+        $diff = $ago->diff($now); // TODO: weird issue (refer to notes.md.. section 9 lecture 128).
+
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
+
+        $string = array(
+            'y' => 'year',
+            'm' => 'month',
+            'w' => 'week',
+            'd' => 'day',
+            'h' => 'hour',
+            'i' => 'minute',
+            's' => 'second',
+        );
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) {
+                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        if (!$full) $string = array_slice($string, 0, 1);
+        return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 
     public function getId() {
