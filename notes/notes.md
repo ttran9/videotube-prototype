@@ -123,3 +123,10 @@ not returning a value but rather an empty string.
     - I tried other timezones and they did not require this "hack" solution.
     - I tried America/Denver, America/New_York, Pacific/Honolulu, and America/Phoenix as well as modifying php.ini "date.timezone" under
     the [Date] section.
+    
+# section 9 lecture 137
+- In regards to this line of code..
+    - $(button).parent().siblings("." + containerClass).append(comment);
+        - What we do here is we take the "button" (which has the text "REPLY").
+        - We then go to its parent which is the div with a class of "commentForm."
+        - We get the siblings which have the class "repliesSection" and then adding it to the end of that container.
