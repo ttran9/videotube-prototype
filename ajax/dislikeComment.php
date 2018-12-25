@@ -7,7 +7,7 @@ $username = $_SESSION['userLoggedIn'];
 $videoId = $_POST['videoId'];
 $commentId = $_POST['commentId'];
 $userLoggedInObj = new User($con, $username);
-$comment = new Comment($con, $commentId, $videoId, $userLoggedInObj);
+$comment = new Comment($con, $commentId, $userLoggedInObj, $videoId);
 
 echo $comment->dislike();
 ?>
